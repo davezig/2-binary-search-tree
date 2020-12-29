@@ -1,63 +1,69 @@
 class TreeNode {
   constructor(val) {
-    this.val = val;
-    this.left = null;
-    this.right = null;
+      this.val = val;
+      this.left = null;
+      this.right = null;
   }
 }
-
 class BST {
   constructor() {
-    this.root = null;
-  }
-  
-  insert(val, root=this.root) {
-    if(!this.root) {
-      this.root = new TreeNode(val);
-      return; 
-    }
-    if(val < root.val) {
-      if (!root.left) {
-        root.left = new TreeNode(val);
+          this.root = null;
       }
-      else {
-        this.insert(val, root.left);
+      // new TreeNode(val)
+  insert(val, root = this.root) {
+      if (root === null) {
+          this.root = new TreeNode(val)
+          return;
       }
-    }
-    else {
-      if (!root.right) {
-        root.right = new TreeNode(val);
+      let value = new TreeNode(val)
+      if (val < root.val) {
+          if (!root.left) {
+              root.left = value
+          } else {
+              this.insert(val, root.left)
+          }
       }
-      else {
-        this.insert(val, root.right);
+      if (val >= root.val) {
+          if (!root.right) {
+              root.right = value
+          } else {
+              this.insert(val, root.right)
+          }
       }
-    }
   }
-  
-  searchRecur(val, root=this.root){
-    if(!root) return false;
-    
-    if (val < root.val) {
-      return this.searchRecur(val, root.left);
-    }
-    else if (val > root.val) {
-      return this.searchRecur(val, root.right);
-    }
-    else {
-      return true;
-    }
+  searchRecur(val, root = this.root) {
+      if (root === null) return false;
+      if (val < root.val) {
+          return this.searchRecur(val, root.left) //! 9 - 9
+      } else if (val > root.val) {
+          return this.searchRecur(val, root.right)
+      } else {
+          return true
+      }
   }
-
-  searchIter(val, root=this.root) {
-    if(!root) return false;
-
-    if (val) return true;
-    else return false;
+  searchIter(val) {
+      let root = this.root
+          //! looping 
+      while (root !== null) {
+          if (val < root.val) {
+              root = root.left
+          } else if (val > root.val) {
+              root = root.right
+          } else {
+              return true
+          }
+      }
+      return false
   }
-
 }
-
 module.exports = {
-    TreeNode, 
-    BST
+  TreeNode,
+  BST
 };
+let tree1 = new BST()
+tree1.insert(10);
+tree1.insert(9);
+tree1.insert(7);
+tree1.insert(16);
+tree1.insert(7);
+tree1.insert(8);
