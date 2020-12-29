@@ -1,5 +1,5 @@
 function findMin(root) {
-
+  if (!root) return null;
 }
 
 
