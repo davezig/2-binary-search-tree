@@ -1,8 +1,10 @@
 function findMin(root) {
-  if (!root) return null;
+  if (root === null) return null;
+  while (root.left) {
+      root = root.left
+  }
+  return root
 }
-
-
 module.exports = {
   findMin
 };
